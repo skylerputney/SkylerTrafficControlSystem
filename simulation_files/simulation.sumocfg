@@ -1,0 +1,24 @@
+<configuration>
+
+    <input>
+        <net-file value="network.net.xml"/>
+        <route-files value="routes.rou.xml"/>
+        <additional-files value="detectors.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="5000"/>
+        <step-length value="0.5"/>  <!-- Set simulation step to 0.5 seconds -->
+
+    </time>
+    <output>
+        <tripinfo-output value="output_simulated_files/tripinfo.xml"/>
+        <summary-output value="output_simulated_files/summary.xml"/>
+        <fcd-output value="output_simulated_files/fcd.xml"/>
+        <file name="tlsstate.xml" type="device.tls-output" />
+    </output>
+    <gui>
+        <!-- Specify the path to your image as a background -->
+        <background-image file="green_color.png"/>
+    </gui>
+</configuration>

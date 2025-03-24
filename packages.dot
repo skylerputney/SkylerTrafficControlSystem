@@ -1,0 +1,43 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"TrafficControl" [color="black", label=<TrafficControl>, shape="box", style="solid"];
+"TrafficControl.DataLogger" [color="black", label=<TrafficControl.DataLogger>, shape="box", style="solid"];
+"TrafficControl.Detector" [color="black", label=<TrafficControl.Detector>, shape="box", style="solid"];
+"TrafficControl.DetectorManager" [color="black", label=<TrafficControl.DetectorManager>, shape="box", style="solid"];
+"TrafficControl.Intersection" [color="black", label=<TrafficControl.Intersection>, shape="box", style="solid"];
+"TrafficControl.SUMOIntersectionMap" [color="black", label=<TrafficControl.SUMOIntersectionMap>, shape="box", style="solid"];
+"TrafficControl.SUMOIntersectionsConfig" [color="black", label=<TrafficControl.SUMOIntersectionsConfig>, shape="box", style="solid"];
+"TrafficControl.Simulation" [color="black", label=<TrafficControl.Simulation>, shape="box", style="solid"];
+"TrafficControl.SimulationManager" [color="black", label=<TrafficControl.SimulationManager>, shape="box", style="solid"];
+"TrafficControl.TLController" [color="black", label=<TrafficControl.TLController>, shape="box", style="solid"];
+"TrafficControl.TLState" [color="black", label=<TrafficControl.TLState>, shape="box", style="solid"];
+"TrafficControl.TrafficController" [color="black", label=<TrafficControl.TrafficController>, shape="box", style="solid"];
+"TrafficControl.TrafficLightMode" [color="black", label=<TrafficControl.TrafficLightMode>, shape="box", style="solid"];
+"TrafficControl.main" [color="black", label=<TrafficControl.main>, shape="box", style="solid"];
+"TrafficControl.Detector" -> "TrafficControl.SUMOIntersectionsConfig" [arrowhead="open", arrowtail="none"];
+"TrafficControl.DetectorManager" -> "TrafficControl.Detector" [arrowhead="open", arrowtail="none"];
+"TrafficControl.Intersection" -> "TrafficControl.DetectorManager" [arrowhead="open", arrowtail="none"];
+"TrafficControl.Intersection" -> "TrafficControl.SUMOIntersectionsConfig" [arrowhead="open", arrowtail="none"];
+"TrafficControl.Intersection" -> "TrafficControl.TLState" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.Detector" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.DetectorManager" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.Intersection" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.SUMOIntersectionsConfig" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.TLController" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.TLState" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionMap" -> "TrafficControl.TrafficController" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SUMOIntersectionsConfig" -> "TrafficControl.TrafficLightMode" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SimulationManager" -> "TrafficControl.DataLogger" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SimulationManager" -> "TrafficControl.Simulation" [arrowhead="open", arrowtail="none"];
+"TrafficControl.SimulationManager" -> "TrafficControl.TrafficController" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TLController" -> "TrafficControl.DataLogger" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TLController" -> "TrafficControl.Intersection" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TLController" -> "TrafficControl.SUMOIntersectionsConfig" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TLController" -> "TrafficControl.TLState" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TLController" -> "TrafficControl.TrafficLightMode" [arrowhead="open", arrowtail="none"];
+"TrafficControl.TrafficController" -> "TrafficControl.TLController" [arrowhead="open", arrowtail="none"];
+"TrafficControl.main" -> "TrafficControl.DataLogger" [arrowhead="open", arrowtail="none"];
+"TrafficControl.main" -> "TrafficControl.SUMOIntersectionMap" [arrowhead="open", arrowtail="none"];
+"TrafficControl.main" -> "TrafficControl.SimulationManager" [arrowhead="open", arrowtail="none"];
+}

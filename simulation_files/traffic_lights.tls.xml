@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional>
+    <!-- Traffic Light Logic for the Intersection -->
+    <tlLogic id="traffic_junction" type="static" programID="1" offset="0">
+        <!-- North-South Green -->
+        <phase duration="30" state="GGrrGGrr"/>
+        <!-- North-South Yellow -->
+        <phase duration="5" state="yyrryyrr"/>
+        <!-- East-West Green -->
+        <phase duration="30" state="rrGGrrGG"/>
+        <!-- East-West Yellow -->
+        <phase duration="5" state="rryyrryy"/>
+    </tlLogic>
+</additional>
+
