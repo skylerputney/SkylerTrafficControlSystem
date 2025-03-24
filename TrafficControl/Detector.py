@@ -1,6 +1,6 @@
 import traci
 
-from Simulation.SUMOIntersectionsConfig import detectors_map
+from Simulation.SimulationConfig import detectors_map
 
 
 class Detector:
@@ -110,7 +110,7 @@ class SUMODetector(Detector):
 
     def get_sumo_id(self):
         """
-        Retrieve SUMO detector ID from SUMOIntersectionsConfig.py
+        Retrieve SUMO detector ID from SimulationConfig.py
         :return: detector ID (str)
         """
         return detectors_map.get(self.id)

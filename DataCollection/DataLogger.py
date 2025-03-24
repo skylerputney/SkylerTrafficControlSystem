@@ -3,9 +3,8 @@ import os
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
 from datetime import datetime
-
 from FileManager.FileManager import FileManager
-from Simulation.SUMOIntersectionsConfig import TRAFFIC_LIGHT_MODE
+from TrafficControl.TrafficControlConfig import TRAFFIC_LIGHT_MODE
 from Simulation.Simulation import TRAFFIC_GEN_SCALE
 
 
@@ -19,8 +18,6 @@ class DataLogger:
         :param log_dir: Directory to store log files
         :param plot_dir: Directory to store plots
         """
-        #self.log_dir = log_dir
-        #os.makedirs(self.log_dir, exist_ok=True)
         self.log_manager = FileManager(log_dir)
         self.plot_dir = plot_dir
         os.makedirs(self.plot_dir, exist_ok=True)

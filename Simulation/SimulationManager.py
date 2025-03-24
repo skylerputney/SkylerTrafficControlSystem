@@ -1,6 +1,6 @@
 from DataCollection.TrafficDataCollector import TrafficDataCollector
 from MachineLearning.ModelTrainer import ModelTrainer
-from Simulation.SUMOIntersectionsConfig import intersections_map, intersection_detectors_map
+from Simulation.SimulationConfig import intersections_map, intersection_detectors_map, SIMULATION_CONFIG_PATH
 from Simulation.Simulation import Simulation
 from TrafficControl.Detector import DetectorFactory
 from TrafficControl.DetectorManager import DetectorManager
@@ -10,23 +10,21 @@ from TrafficControl.TLState import TLState
 from TrafficControl.TrafficControlConfig import TRAFFIC_LIGHT_MODE
 from TrafficControl.TrafficController import TrafficController
 
-
 class SimulationManager:
     """
     Manages the Simulation (SUMO), TrafficController, TrafficDataCollector, and ModelTrainer interaction
     """
-    def __init__(self, sumo_config_path: str, iterations: int, data_collector: TrafficDataCollector):
+    def __init__(self, iterations: int):
         """
         Initializes an instance of SimulationManager
-        :param sumo_config_path: Path to SUMO configuration file
         :param iterations: Number of iterations to run the simulation
         """
-        self.simulation = Simulation(sumo_config_path)
+        self.simulation = Simulation(SIMULATION_CONFIG_PATH)
         self.iterations = iterations
         self.current_iteration = 1
-        self.data_collector = data_collector
         self.time_step = 0
         self.configure_traffic_controller()
+        self.data_collector = TrafficDataCollector()
         self.model_trainer = ModelTrainer()
 
     def configure_intersections(self) -> list[Intersection]:
@@ -34,7 +32,7 @@ class SimulationManager:
         Configures Intersections with their IDs and Detectors to represent SUMO intersections
         Sets intersections to have North/South Green for 15 seconds initially
         :return: List of Intersection Objects representing SUMO intersections
-                contained in SUMOIntersectionsConfig.py
+                contained in SimulationConfig.py
         """
         intersections = []
         for intersection in intersections_map:
@@ -47,8 +45,8 @@ class SimulationManager:
     def configure_traffic_controller(self):
         """
         Configures a TrafficController which contains instances of TLController for each
-            SUMO intersection contained in SUMOIntersectionsConfig.py
-        Utilizes the TrafficLightMode defined in SUMOIntersectionsConfig.py
+            SUMO intersection contained in SimulationConfig.py
+        Utilizes the TrafficLightMode defined in SimulationConfig.py
         """
         intersections = self.configure_intersections()
         tl_controllers = []

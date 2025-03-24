@@ -1,5 +1,5 @@
 from TrafficControl.Intersection import Intersection
-from Simulation.SUMOIntersectionsConfig import SUMO_STEPS_PER_SECOND
+from Simulation.SimulationConfig import SUMO_STEPS_PER_SECOND
 from TrafficControl.TLState import TLState
 from TrafficControl.TrafficLightMode import TrafficLightMode
 import TrafficControl.TLDensityCycleConfig as TLDensityCycleConfig
@@ -72,7 +72,7 @@ class StaticTLController(TLController):
         """
         Update Traffic Light state based on defined phase_state_machine and given static timings
         :param kwargs: dictionary containing a 'time_step' argument (if defined) that represents
-                simulation time (in s) when divided by SUMO_STEPS_PER_SECOND (from SUMOIntersectionsConfig.py)
+                simulation time (in s) when divided by SUMO_STEPS_PER_SECOND (from SimulationConfig.py)
                 Utilized to track simulation time
         """
         # Calculate time elapsed since last update

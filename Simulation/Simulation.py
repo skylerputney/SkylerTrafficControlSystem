@@ -1,6 +1,6 @@
 import traci
 
-from Simulation.SUMOIntersectionsConfig import SUMO_GUI
+from Simulation.SimulationConfig import SUMO_GUI
 
 TRAFFIC_GEN_SCALE = 1
 

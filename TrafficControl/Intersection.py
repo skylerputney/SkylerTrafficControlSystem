@@ -1,7 +1,7 @@
 import traci
 
 from TrafficControl.DetectorManager import DetectorManager
-from Simulation.SUMOIntersectionsConfig import intersections_map
+from Simulation.SimulationConfig import intersections_map
 from TrafficControl.TLState import TLState
 
 
@@ -52,7 +52,7 @@ class SUMOIntersection(Intersection):
         """
         self.state = state
         self.phase_time = phase_time
-        tl_id = intersections_map.get(self.id)  # Retrieve SUMO traffic light ID from SUMOIntersectionsConfig.py
+        tl_id = intersections_map.get(self.id)  # Retrieve SUMO traffic light ID from SimulationConfig.py
         try:
             traci.trafficlight.setPhase(tl_id, self.state.value)  # Set SUMO traffic light phase
             traci.trafficlight.setPhaseDuration(tl_id, self.phase_time)  # Set SUMO traffic light phase duration
