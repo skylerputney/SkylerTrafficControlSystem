@@ -85,3 +85,15 @@ class FileManager:
         :return: Object loaded from given .pkl file
         """
         return joblib.load(os.path.join(self.main_directory_path, file_name))
+
+    def save_pkl(self, data, file_name, sub_dir_path=None):
+        """
+        Saves the given data into a .pkl file
+        :param data: Data to save to file
+        :param file_name: Name of file to save to
+        :param sub_path: Path inside main directory to save file within, if provided
+        :return: Path file saved to
+        """
+        path = os.path.join(self.main_directory_path, sub_dir_path if not None else "", file_name)
+        joblib.dump(data, path)
+        return path

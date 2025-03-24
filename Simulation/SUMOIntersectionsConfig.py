@@ -3,9 +3,6 @@ from TrafficControl.TrafficLightMode import TrafficLightMode
 # Whether to open simulation GUI
 SUMO_GUI = False
 
-# Mode to operate controllers with
-TRAFFIC_LIGHT_MODE = TrafficLightMode.CONGESTION_BASED
-
 # Timing adjustment for SUMO steps v. seconds
 SUMO_STEPS_PER_SECOND = 2
 

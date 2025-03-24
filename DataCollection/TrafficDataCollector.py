@@ -1,11 +1,11 @@
-from Config import DATA_DIR, PLOT_DIR
+from Config import INTERSECTION_DATA_DIR, DETECTOR_DATA_DIR, PLOT_DIR
 from DataCollection.DataLogger import DataLogger
 
 
 class TrafficDataCollector:
     def __init__(self):
-        self.intersection_data_logger = DataLogger(DATA_DIR, PLOT_DIR)
-        self.detector_data_logger = DataLogger(DATA_DIR, PLOT_DIR)
+        self.intersection_data_logger = DataLogger(INTERSECTION_DATA_DIR, PLOT_DIR)
+        self.detector_data_logger = DataLogger(DETECTOR_DATA_DIR, PLOT_DIR)
 
     def log_intersection_data(self, intersection_data):
         """

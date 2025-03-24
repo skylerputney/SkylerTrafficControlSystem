@@ -110,7 +110,7 @@ class DataLogger:
         :return: Average of all attributes (float), None if not found
         """
         try:
-            path = os.path.join(self.log_dir, xml_file)
+            path = os.path.join(self.log_manager.main_directory_path, "../", xml_file)
             print(f"DataLogger: Trying to open: {path}")
             tree = ET.parse(path)
             root = tree.getroot()
