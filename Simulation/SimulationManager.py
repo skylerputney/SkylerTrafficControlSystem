@@ -1,5 +1,5 @@
 from DataCollection.TrafficDataCollector import TrafficDataCollector
-from MachineLearning.ModelTrainer import ModelTrainer
+from MachineLearning.ModelTrainer import ModelTrainerFactory
 from Simulation.SimulationConfig import intersections_map, intersection_detectors_map, SIMULATION_CONFIG_PATH
 from Simulation.Simulation import Simulation
 from TrafficControl.Detector import DetectorFactory
@@ -25,7 +25,7 @@ class SimulationManager:
         self.time_step = 0
         self.configure_traffic_controller()
         self.data_collector = TrafficDataCollector()
-        self.model_trainer = ModelTrainer()
+        self.model_trainer = ModelTrainerFactory()
 
     def configure_intersections(self) -> list[Intersection]:
         """

@@ -1,14 +1,19 @@
-# File Path to Dataset
 import os
-
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
-
 from Config import BASE_DIR, DATA_DIR
 
-MODEL_FILE_PATH = os.path.join(BASE_DIR, "Models")
+# Max number of SUMO Simulation steps for Reinforcement Learning
+RL_MAX_STEPS = 3000
+
+
+# File Path to Supervised Models
+SUPERVISED_MODEL_FILE_PATH = os.path.join(BASE_DIR, "Models", "Supervised")
+# File Path to Reinforcement Models
+REINFORCEMENT_MODEL_FILE_PATH = os.path.join(BASE_DIR, "Models", "Reinforcement")
+
 
 # Model Initializations
 MODELS = {

@@ -1,14 +1,16 @@
 import os
-import pandas as pd
 from datetime import datetime
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from xgboost.testing.data import joblib
 import joblib
-from Config import DATA_DIR
+from Config import DATA_DIR, ML_TRAINING_TYPE
 from FileManager.FileManager import FileManager
 from MachineLearning.ModelConfig import get_latest_dataset, MODEL_FILE_PATH, MODELS, PARAM_GRIDS
+from MachineLearning.ReinforcementModelTrainer import ReinforcementModelTrainer
+from MachineLearning.SupervisedModelTrainer import SupervisedModelTrainer
+from MachineLearning.TrainingMode import TrainingMode
 
 
 class ModelTrainer:
@@ -18,32 +20,6 @@ class ModelTrainer:
     def __init__(self, iteration=1):
         self.iteration = iteration  # Iteration of consecutive training
         self.training_data_path = get_latest_dataset()
-        self.data_manager = FileManager(DATA_DIR)
-        self.model_manager = FileManager(MODEL_FILE_PATH)
-
-    def get_features_and_targets(self):
-        """
-        Defines features (X) and target variables (Y) for model training,
-        Split the data into training and testing sets,
-        Scale Features
-        :return: X_train_scaled, X_test_scaled, Y_train, Y_test
-        """
-        # Read in data
-        data = self.data_manager.load_latest_csv()
-
-        # Define features (X) and target variables (Y)
-        X = data[['state', 'phase_duration', 'current_phase_time']]
-        Y = data[['phase_duration']] # Testing w/o state
-
-        # Split data into training and testing sets
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-
-        # Scale features
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.fit_transform(X_test)
-
-        return X_train_scaled, X_test_scaled, Y_train, Y_test
 
     def train_models(self, iteration=1):
         #Update iteration#
@@ -121,3 +97,13 @@ class ModelTrainer:
         model = joblib.load(model_path)
         print(f"ModelTrainer: Loaded {model_name} from {model_path}")
         return model
+
+
+def ModelTrainerFactory(iteration: int=1) -> ModelTrainer:
+    """
+    Initializes an instance of ModelTrainer based on ML_TRAINING_TYPE (Config.py)
+    :param iteration: Iteration # of consecutive training
+    :return: ModelTrainer
+    """
+    return SupervisedModelTrainer(iteration) if ML_TRAINING_TYPE is TrainingMode.SUPERVISED else ReinforcementModelTrainer(iteration)
+
