@@ -20,16 +20,16 @@ class FileManager:
         """
         Creates a sub-directory with the given name
         :param directory_name: Name to give the sub-directory
-        :return: sub_directory_path: Path to created sub-directory
+        :return: sub_directory_path: Relative Path to created sub-directory
         """
         sub_directory_path = os.path.join(self.main_directory_path, directory_name)
         os.makedirs(sub_directory_path)
-        return sub_directory_path
+        return directory_name
 
     def get_latest_sub_dir(self):
         """
-        Returns the path to the most recently created sub-directory, or None if none exist
-        :return: Path to most recently created sub-directory
+        Returns the relative path to the most recently created sub-directory, or None if none exist
+        :return: Relative Path to most recently created sub-directory
         """
         sub_directories = [f for f in os.listdir(self.main_directory_path) if os.path.isdir(os.path.join(self.main_directory_path, f))]
 
@@ -37,7 +37,7 @@ class FileManager:
             return None
 
         latest_sub_dir = max(sub_directories, key=lambda f: os.path.getctime(os.path.join(self.main_directory_path, f)))
-        return os.path.join(self.main_directory_path, latest_sub_dir)
+        return latest_sub_dir
 
     def get_latest_csv(self):
         """
@@ -78,13 +78,18 @@ class FileManager:
         data.to_csv(file_path, index=False)
         return file_path
 
-    def load_pkl(self, file_name):
+    def load_pkl(self, file_name, sub_dir_path=None):
         """
         Loads the given .pkl file in the managed directory into a Pandas dataframe
         :param file_name: Name of the .pkl file to load
-        :return: Object loaded from given .pkl file
+        :param sub_dir_path: Path inside main directory to load file from, if provided
+        :return: Object loaded from given .pkl file, None if file not found
         """
-        return joblib.load(os.path.join(self.main_directory_path, file_name))
+        try:
+            df = joblib.load(os.path.join(self.main_directory_path, sub_dir_path if not None else "", file_name))
+        except FileNotFoundError:
+            return None
+        return df
 
     def save_pkl(self, data, file_name, sub_dir_path=None):
         """
