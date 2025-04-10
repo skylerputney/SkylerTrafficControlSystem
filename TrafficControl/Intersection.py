@@ -1,12 +1,10 @@
 from TrafficControl.DetectorManager import DetectorManager
-from TrafficControl.RLModelIntersection import ModelIntersection
-from TrafficControl.SUMOIntersection import SUMOIntersection
 from TrafficControl.TLState import TLState
 
 
 class Intersection:
     """
-    Represents a real or SUMO (simulation) traffic intersection
+    Represents a real and SUMO (simulation) traffic intersection
     """
 
     def __init__(self, id: int, initial_state: TLState, initial_phase_time: float, detector_manager: DetectorManager):
@@ -38,6 +36,7 @@ class Intersection:
         raise NotImplementedError
 
 
+
 def IntersectionFactory(id: int, initial_state: TLState, initial_phase_time: float, detector_manager: DetectorManager, simulation_mode: bool) -> Intersection:
     """
     Initializes an instance of Intersection based on Simulation/Model mode
@@ -48,6 +47,8 @@ def IntersectionFactory(id: int, initial_state: TLState, initial_phase_time: flo
     :param simulation_mode: True if controlling simulation, False if controlling model
     :return:
     """
+    from TrafficControl.RLModelIntersection import ModelIntersection
+    from TrafficControl.SUMOIntersection import SUMOIntersection
     if simulation_mode:
         return SUMOIntersection(id, initial_state, initial_phase_time, detector_manager)
     else:

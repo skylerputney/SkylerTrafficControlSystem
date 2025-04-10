@@ -1,4 +1,3 @@
-from TrafficControl.SUMODetector import SUMODetector
 
 
 class Detector:
@@ -38,5 +37,6 @@ def DetectorFactory(id: int, simulation_mode: bool):
     :param id: ID of the given Detector
     :return:
     """
+    from TrafficControl.SUMODetector import SUMODetector
     if simulation_mode:
         return SUMODetector(id)

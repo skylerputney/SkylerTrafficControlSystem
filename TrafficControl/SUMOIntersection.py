@@ -12,7 +12,7 @@ class SUMOIntersection(Intersection):
 
     def update(self, state: TLState, phase_time: float):
         """
-        Updates the simulation intersections traffic lights to match the given state and phase duration
+        Updates the simulation intersections' traffic lights to match the given state and phase duration
         :param state: State to update to (from TLState.py)
         :param phase_time: Duration of phase
         """

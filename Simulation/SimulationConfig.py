@@ -7,6 +7,9 @@ SUMO_GUI = False
 # Simulation Config Path
 SIMULATION_CONFIG_PATH = os.path.join(BASE_DIR, "simulation_files", "simulation.sumocfg")
 
+# Simulation Traffic Generation Scale (0-1)
+TRAFFIC_GEN_SCALE = 1
+
 # Timing adjustment for SUMO steps v. seconds
 SUMO_STEPS_PER_SECOND = 2
 

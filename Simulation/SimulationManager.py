@@ -1,3 +1,4 @@
+from Config import TRAINING_MODE
 from DataCollection.TrafficDataCollector import TrafficDataCollector
 from MachineLearning.ModelTrainer import ModelTrainerFactory
 from Simulation.SimulationConfig import intersections_map, intersection_detectors_map, SIMULATION_CONFIG_PATH
@@ -25,7 +26,7 @@ class SimulationManager:
         self.time_step = 0
         self.configure_traffic_controller()
         self.data_collector = TrafficDataCollector()
-        self.model_trainer = ModelTrainerFactory()
+        self.model_trainer = ModelTrainerFactory(self.current_iteration)
 
     def configure_intersections(self) -> list[Intersection]:
         """
@@ -61,16 +62,18 @@ class SimulationManager:
         Uses TrafficController to update simulation traffic lights
         """
         while self.current_iteration <= self.iterations:
+            self.configure_traffic_controller()
             self.simulation.start()
             while self.simulation.get_vehicle_number() > 0:
                 self.traffic_controller.update(time_step=self.time_step)
-                self.data_collector.log_intersection_data(self.traffic_controller.get_intersection_data())
+                self.data_collector.log_intersection_data(self.traffic_controller.get_phase_duration_feature_data())
                 self.data_collector.log_detector_data(self.traffic_controller.get_detector_data())
                 self.simulation.step()
                 self.time_step += 1
             self.simulation.end()
             self.data_collector.end_collection(self.current_iteration)
-            self.model_trainer.train_models(iteration=self.current_iteration)
+            if TRAINING_MODE:
+                self.model_trainer.train_test_model(iteration=self.current_iteration)
             self.current_iteration += 1
 
 

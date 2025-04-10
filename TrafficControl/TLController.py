@@ -1,7 +1,4 @@
-from TrafficControl.AITLController import AITLController
-from TrafficControl.CongestionTLController import CongestionTLController
 from TrafficControl.Intersection import Intersection
-from TrafficControl.StaticTLController import StaticTLController
 from TrafficControl.TrafficLightMode import TrafficLightMode
 import time
 
@@ -24,7 +21,7 @@ class TLController():
         self.simulation_mode = simulation_mode
         self.current_phase = intersection.get_state()  # Current phase
         self.phase_time = 0  # Time in current phase
-        self.last_update_time = time() if not self.simulation_mode else 0  # Time when last phase change occurred
+        self.last_update_time = time.time() if not self.simulation_mode else 0  # Time when last phase change occurred
 
     def get_tl_mode(self) -> TrafficLightMode:
         return self.tl_mode
@@ -55,6 +52,9 @@ def TLControllerFactory(intersection: Intersection, tl_mode: TrafficLightMode, s
             these represent static light cycle timings
     :return: TLController for given mode
     """
+    from TrafficControl.AITLController import AITLController
+    from TrafficControl.CongestionTLController import CongestionTLController
+    from TrafficControl.StaticTLController import StaticTLController
     if tl_mode == TrafficLightMode.STATIC:
         return StaticTLController(intersection, simulation_mode, kwargs.get('green_time', 15), kwargs.get('yellow_time', 3),
                                   kwargs.get('all_red_time', 2))

@@ -1,4 +1,6 @@
 import time
+from datetime import datetime
+
 from Simulation.SimulationConfig import SUMO_STEPS_PER_SECOND
 from TrafficControl.Intersection import Intersection
 from TrafficControl.TLController import TLController
@@ -27,6 +29,7 @@ class StaticTLController(TLController):
         self.yellow_time = yellow_time
         self.all_red_time = all_red_time
         self.current_phase_index = self.phase_state_machine.index(self.current_phase)
+        self.state_duration = 0  # For MachineLearning purposes
 
     def update(self, **kwargs):
         """
@@ -36,7 +39,7 @@ class StaticTLController(TLController):
                 Utilized to track simulation time
         """
         # Calculate time elapsed since last update
-        current_time = kwargs.get('time_step') / SUMO_STEPS_PER_SECOND if not None else time()
+        current_time = kwargs.get('time_step') / SUMO_STEPS_PER_SECOND if kwargs.get('time_step') is not None else time.time()
         time_elapsed = current_time - self.last_update_time
         self.last_update_time = current_time
 
@@ -52,6 +55,7 @@ class StaticTLController(TLController):
             print(f"t{current_time}: Updating to {self.current_phase} for {self.get_state_duration()}")
             # Update intersection's state to reflect TLController updates
             self.intersection.update(self.current_phase, self.get_state_duration())
+            self.state_duration = self.get_state_duration()  # For ML Purposes
 
     def get_state_duration(self) -> int:
         """

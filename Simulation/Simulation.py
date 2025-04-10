@@ -1,8 +1,8 @@
 import traci
 
-from Simulation.SimulationConfig import SUMO_GUI
+from Config import RUN_MODEL_ON_SIM
+from Simulation.SimulationConfig import SUMO_GUI, TRAFFIC_GEN_SCALE
 
-TRAFFIC_GEN_SCALE = 1
 
 class Simulation:
     """
@@ -21,6 +21,8 @@ class Simulation:
         Starts a SUMO simulation from the given configuration file with a GUI
         """
         sumo_cmd = ["sumo-gui" if SUMO_GUI else "sumo", "-c", self.sumo_config_path, "--tripinfo-output", "tripinfo.xml", "--scale", str(TRAFFIC_GEN_SCALE)]  # Sumo Arguments: launch with GUI, config file, tripinfo output file, traffic generation scale (0-1)
+        if RUN_MODEL_ON_SIM:
+            sumo_cmd.extend(["--delay", "1000"])  # Make simulation run in real-time speed
         traci.start(sumo_cmd)
 
     def step(self):

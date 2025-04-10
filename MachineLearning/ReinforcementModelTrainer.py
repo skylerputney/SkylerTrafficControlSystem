@@ -5,4 +5,5 @@ class ReinforcementModelTrainer(ModelTrainer):
     """
     Trains Reinforcement Learning Models
     """
-    def __init__(self):
+    def __init__(self, iteration=1):
+        raise NotImplementedError

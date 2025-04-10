@@ -1,4 +1,7 @@
+from Simulation.SimulationConfig import TRAFFIC_GEN_SCALE
+from TrafficControl.CongestionTLController import CongestionTLController
 from TrafficControl.TLController import TLController
+from TrafficControl.TLState import TLState
 
 
 class TrafficController:
@@ -53,6 +56,30 @@ class TrafficController:
                 "state": tl_controller.get_intersection().get_state().value,
                 "phase_duration": tl_controller.get_intersection().get_phase_time(),
                 "current_phase_time": tl_controller.get_phase_time()
+            }
+            data.append(data_entry)
+
+        return data
+
+    def get_phase_duration_feature_data(self):
+        """
+        Obtains data related to Phase Duration for model training
+        :return: Data from TLControllers (Dictionary)
+        """
+        data = []
+        for tl_controller in self.tl_controllers:
+            if tl_controller.get_phase_time() != 0 or tl_controller.state_duration == 0:
+                continue
+            if tl_controller.current_phase is not TLState.NSG and tl_controller.current_phase is not TLState.EWG:
+                continue
+            detectorA, detectorB = (1, 3) if tl_controller.current_phase is TLState.NSG else (0, 2)
+            detectorA = tl_controller.intersection.detector_manager.get_detector(detectorA)
+            detectorB = tl_controller.intersection.detector_manager.get_detector(detectorB)
+            data_entry = {
+                "VehicleCount": detectorA.get_number_vehicles() + detectorB.get_number_vehicles(),
+                "DetectorLength": detectorA.get_detector_length() + detectorB.get_detector_length(),
+                "PhaseDuration": tl_controller.state_duration,
+                "CongestionLevel": TRAFFIC_GEN_SCALE
             }
             data.append(data_entry)
 

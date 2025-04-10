@@ -78,6 +78,19 @@ class FileManager:
         data.to_csv(file_path, index=False)
         return file_path
 
+    def save_txt(self, data: str, file_name, sub_dir_path=None):
+        """
+        Saves the given string data into a TXT file with the given name
+        :param data: String to save to file
+        :param file_name: Name of file to save to
+        :param sub_dir_path: Path inside main directory to save file within, if provided
+        :return: Path file saved to
+        """
+        file_path = os.path.join(self.main_directory_path, sub_dir_path if sub_dir_path is not None else "", file_name)
+        with open(file_path, "w") as txt_file:
+            txt_file.write(data)
+        return file_path
+
     def load_pkl(self, file_name, sub_dir_path=None):
         """
         Loads the given .pkl file in the managed directory into a Pandas dataframe
@@ -86,7 +99,7 @@ class FileManager:
         :return: Object loaded from given .pkl file, None if file not found
         """
         try:
-            df = joblib.load(os.path.join(self.main_directory_path, sub_dir_path if not None else "", file_name))
+            df = joblib.load(os.path.join(self.main_directory_path, sub_dir_path if sub_dir_path is not None else "", file_name))
         except FileNotFoundError:
             return None
         return df
@@ -99,6 +112,6 @@ class FileManager:
         :param sub_path: Path inside main directory to save file within, if provided
         :return: Path file saved to
         """
-        path = os.path.join(self.main_directory_path, sub_dir_path if not None else "", file_name)
+        path = os.path.join(self.main_directory_path, sub_dir_path if sub_dir_path is not None else "", file_name)
         joblib.dump(data, path)
         return path

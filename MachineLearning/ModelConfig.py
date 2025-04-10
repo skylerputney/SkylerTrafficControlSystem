@@ -8,12 +8,13 @@ from Config import BASE_DIR, DATA_DIR
 # Max number of SUMO Simulation steps for Reinforcement Learning
 RL_MAX_STEPS = 3000
 
-
 # File Path to Supervised Models
 SUPERVISED_MODEL_FILE_PATH = os.path.join(BASE_DIR, "Models", "Supervised")
 # File Path to Reinforcement Models
 REINFORCEMENT_MODEL_FILE_PATH = os.path.join(BASE_DIR, "Models", "Reinforcement")
 
+# Name of model to run AITLController
+AI_MODEL = "XGBoost"
 
 # Model Initializations
 MODELS = {
@@ -38,7 +39,7 @@ PARAM_GRIDS = {
     }
 }
 
-def get_latest_iteration_folder(folder_path=MODEL_FILE_PATH):
+def get_latest_iteration_folder(folder_path=SUPERVISED_MODEL_FILE_PATH):
     """Returns the path of the most recently created model iteration folder in the given folder."""
     iteration_folders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, f))]
 

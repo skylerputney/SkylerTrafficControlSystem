@@ -76,13 +76,15 @@ class DataLogger:
                     color='black'  # Label color
                 )
             ax.set_ylabel("Time (seconds)")  # Label y-axis
-            ax.set_title(f"Average Trip Time and Average Wait Time\n{TRAFFIC_LIGHT_MODE}: Congestion {TRAFFIC_GEN_SCALE}\nvehicle_count_fixed_time()")  # Label graph title
+            ax.set_title(f"Average Trip Time and Average Wait Time\n{TRAFFIC_LIGHT_MODE}: Congestion {TRAFFIC_GEN_SCALE}")#\nvehicle_count_fixed_time()")  # Label graph title
             plt.tight_layout()  # Adjust plot to fit text
             current_time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             plot_path = os.path.join(self.plot_dir, f"avg_trip_wait_times_{TRAFFIC_LIGHT_MODE}_{current_time}.png")
             plt.savefig(plot_path)  # Save plot
             plt.close()  # Close plot
             print(f"DataLogger: Plot saved to {plot_path}.")
+            with open(f"avg_trip_wait_times_{TRAFFIC_LIGHT_MODE}_{current_time}.txt", "w+") as txt_file:
+                txt_file.write(f"WaitTime: {avg_wait_time}\nTripTime: {avg_trip_time}")
 
     def compute_average_trip_time(self):
         """
