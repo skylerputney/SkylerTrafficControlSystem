@@ -25,8 +25,6 @@ class ModelIntersection(Intersection):
         """
         self.state = state
         self.phase_time = phase_time
-        #plc = PLC(TRAFFIC_PLC_IP_ADDRESS)
-        #plc.connect()
         plc_tag = rl_intersections_map.get(self.id)
         self.plc.write_tag(plc_tag + "_DATA[5]", state.value)
 

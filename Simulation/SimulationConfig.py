@@ -2,7 +2,7 @@ import os
 from Config import BASE_DIR
 
 # Whether to open simulation GUI
-SUMO_GUI = False
+SUMO_GUI = True
 
 # Simulation Config Path
 SIMULATION_CONFIG_PATH = os.path.join(BASE_DIR, "simulation_files", "simulation.sumocfg")

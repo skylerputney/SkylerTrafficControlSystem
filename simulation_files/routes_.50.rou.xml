@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<routes>
+    <!-- VTypes -->
+    <vType id="car" length="5.00" maxSpeed="20.00" color="red" accel="1.0" decel="4.5" sigma="0.5"/>
+
+    <!-- Routes -->
+    <route id="east_to_north" edges="east_edge_0 east_edge_1 east_edge_2 east_edge_3 east_edge_4 east_edge_5 north_edge_5 north_edge_6 north_edge_7"/>
+    <route id="east_to_south" edges="east_edge_0 east_edge_1 east_edge_2 east_edge_3 east_edge_4 east_edge_5 south_edge_3 south_edge_4 south_edge_6 south_edge_7 south_edge_8"/>
+    <route id="east_to_west" edges="east_edge_0 east_edge_1 east_edge_2 east_edge_3 east_edge_4 east_edge_5 east_edge_6 east_edge_7 east_edge_8 east_edge_9 east_edge_10 east_edge_11 east_edge_12 east_edge_15"/>
+    <route id="north_to_east1" edges="north_edge_0 north_edge_1 north_edge_2 north_edge_3 north_edge_4 east_edge_6 east_edge_13 east_edge_16 east_edge_15"/>
+    <route id="north_to_east2" edges="north_edge_0 north_edge_1 north_edge_2 north_edge_3 north_edge_4 east_edge_6 east_edge_7 east_edge_8 east_edge_9 east_edge_10 east_edge_11 east_edge_12 east_edge_15"/>
+    <route id="north_to_south" edges="north_edge_0 north_edge_1 north_edge_2 north_edge_3 north_edge_4 north_edge_5 north_edge_6 north_edge_7"/>
+    <route id="north_to_west" edges="north_edge_0 north_edge_1 north_edge_2 north_edge_3 north_edge_4 west_edge_9 west_edge_10 west_edge_11 west_edge_12 west_edge_14 west_edge_15"/>
+    <route id="south_to_east" edges="south_edge_0 south_edge_1 south_edge_2 east_edge_6 east_edge_7 east_edge_8 east_edge_9 east_edge_10 east_edge_11 east_edge_12 east_edge_15"/>
+    <route id="south_to_north" edges="south_edge_0 south_edge_1 south_edge_2 south_edge_3 south_edge_4 south_edge_6 south_edge_7 south_edge_8"/>
+    <route id="south_to_west" edges="south_edge_0 south_edge_1 south_edge_2 west_edge_9 west_edge_10 west_edge_11 west_edge_12 west_edge_14 west_edge_15"/>
+    <route id="west_to_east" edges="west_edge_1 west_edge_2 west_edge_3 west_edge_4 west_edge_5 west_edge_6 west_edge_7 west_edge_8 west_edge_9 west_edge_10 west_edge_11 west_edge_12 west_edge_14 west_edge_15"/>
+    <route id="west_to_north" edges="west_edge_1 west_edge_2 west_edge_3 west_edge_4 west_edge_5 west_edge_6 west_edge_7 west_edge_8 north_edge_5 north_edge_6 north_edge_7"/>
+    <route id="west_to_south" edges="west_edge_1 west_edge_2 west_edge_3 west_edge_4 west_edge_5 west_edge_6 west_edge_7 west_edge_8 south_edge_3 south_edge_4 south_edge_6 south_edge_7 south_edge_8"/>
+
+    <!-- Flows -->
+    <flow id="east_north_flow" type="car" begin="0.00" route="east_to_north" end="1000.00" period="60.00" probability="0.50"/>
+    <flow id="east_south_flow" type="car" begin="0.00" route="east_to_south" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="east_west_flow" type="car" begin="0.00" route="east_to_west" end="1000.00" period="60.00" probability="0.50"/>
+    <flow id="north_east1_flow" type="car" begin="0.00" route="north_to_east1" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="north_east2_flow" type="car" begin="0.00" route="north_to_east2" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="north_south_flow" type="car" begin="0.00" route="north_to_south" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="north_west_flow" type="car" begin="0.00" route="north_to_west" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="south_east_flow" type="car" begin="0.00" route="south_to_east" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="south_north_flow" type="car" begin="0.00" route="south_to_north" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="south_west_flow" type="car" begin="0.00" route="south_to_west" end="1000.00" period="30.00" probability="0.50"/>
+    <flow id="west_east_flow" type="car" begin="0.00" route="west_to_east" end="1000.00" period="60.00" probability="0.50"/>
+    <flow id="west_north_flow" type="car" begin="0.00" route="west_to_north" end="1000.00" period="60.00" probability="0.50"/>
+    <flow id="west_south_flow" type="car" begin="0.00" route="west_to_south" end="1000.00" period="30.00" probability="0.50"/>
+</routes>
+

@@ -1,3 +1,4 @@
+from Config import RUN_MODEL_ON_SIM
 from TrafficControl.DetectorManager import DetectorManager
 from TrafficControl.TLState import TLState
 
@@ -49,7 +50,12 @@ def IntersectionFactory(id: int, initial_state: TLState, initial_phase_time: flo
     """
     from TrafficControl.RLModelIntersection import ModelIntersection
     from TrafficControl.SUMOIntersection import SUMOIntersection
-    if simulation_mode:
+    from TrafficControl.HybridIntersection import HybridIntersection
+    if simulation_mode and RUN_MODEL_ON_SIM:
+        return HybridIntersection(id, initial_state, initial_phase_time, detector_manager)
+    elif simulation_mode:
         return SUMOIntersection(id, initial_state, initial_phase_time, detector_manager)
+    elif not simulation_mode and RUN_MODEL_ON_SIM:
+        raise Exception("IntersectionFactory: Cannot run physical model based on simulation when simulation mode is disabled.")
     else:
         return ModelIntersection(id, initial_state, initial_phase_time, detector_manager)
