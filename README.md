@@ -1,0 +1,2 @@
+# Traffic Control: SUMO Simulation and Physical Model
+A traffic control system with the ability to operate a given Simulation of Urban MObility (SUMO) simulation or a physical model via Ethernet/IP interfacing with an actuating PLC. The traffic control system consists of three operational modes: static control, congestion-based dynamic control, and congestion-based AI control. Further contained within the work is a SupervisedModelTrainer which, when enabled, allows for the training of new or existing Linear Regression, Random Forest, Decision Tree, and/or XGBoost models. 
