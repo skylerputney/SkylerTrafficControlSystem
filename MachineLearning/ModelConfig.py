@@ -38,24 +38,3 @@ PARAM_GRIDS = {
         "subsample": [0.6, 0.8, 1.0]
     }
 }
-
-def get_latest_iteration_folder(folder_path=SUPERVISED_MODEL_FILE_PATH):
-    """Returns the path of the most recently created model iteration folder in the given folder."""
-    iteration_folders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, f))]
-
-    if not iteration_folders:
-        return None
-
-    latest_folder = max(iteration_folders, key=lambda f: os.path.getctime(os.path.join(folder_path, f)))
-    print(f"ModelConfig: Returning model folder: {latest_folder}")
-    return os.path.join(folder_path, latest_folder)
-
-def get_latest_dataset(folder_path=DATA_DIR):
-    """Returns the path of the most recently created CSV file in the given folder."""
-    csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
-
-    if not csv_files:
-        return None
-
-    latest_csv = max(csv_files, key=lambda f: os.path.getctime(os.path.join(folder_path, f)))
-    return os.path.join(folder_path, latest_csv)

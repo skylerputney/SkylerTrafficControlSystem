@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 
-from Config import DATA_DIR, INTERSECTION_DATA_DIR, DETECTOR_DATA_DIR
+from Config import INTERSECTION_DATA_DIR, DETECTOR_DATA_DIR
 from FileManager.FileManager import FileManager
 from MachineLearning.ModelConfig import SUPERVISED_MODEL_FILE_PATH, MODELS, PARAM_GRIDS
 from MachineLearning.ModelTrainer import ModelTrainer

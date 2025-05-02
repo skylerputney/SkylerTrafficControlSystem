@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 from FileManager.FileManager import FileManager
-from MachineLearning.ModelConfig import get_latest_iteration_folder, SUPERVISED_MODEL_FILE_PATH
+from MachineLearning.ModelConfig import SUPERVISED_MODEL_FILE_PATH
 from Simulation.SimulationConfig import TRAFFIC_GEN_SCALE
 from TrafficControl.TLState import TLState
 
