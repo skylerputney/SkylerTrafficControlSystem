@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
-from Config import BASE_DIR, DATA_DIR
+from Config import BASE_DIR
 
 # Max number of SUMO Simulation steps for Reinforcement Learning
 RL_MAX_STEPS = 3000
